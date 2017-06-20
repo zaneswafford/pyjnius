@@ -897,7 +897,11 @@ cdef class JavaMultipleMethod(object):
             scores.append((score, signature))
 
         if not scores:
-            raise JavaException('No methods matching your arguments')
+            raise JavaException(
+                'No method signature matching your arguments:\n'
+                '({})\ncandidates are:\n{}'
+                .format(args_, '\n'.join(methods.keys()))
+            )
         scores.sort()
         score, signature = scores[-1]
 
